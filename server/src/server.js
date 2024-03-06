@@ -1,7 +1,8 @@
 const express = require("express");
 const connect = require("./config/database");
 const dotenv = require("dotenv");
-
+const userModel = require("./models/userModel");
+const User = require("./models/userModel");
 
 dotenv.config();
 const PORT = process.env.PORT;
@@ -14,7 +15,7 @@ app.use(express.json()); // we are using it instead of body-parser for active fu
 app.post("/", async (req, res) => {
     const { name, userEmail, password } = req.body;
 
-    const User = require("./models/userModel");
+
     try {
         const userAdded = await User.create({
             name: name,
@@ -28,9 +29,15 @@ app.post("/", async (req, res) => {
     }
 })
 
-
-app.get("/", (req, res) => {
-    res.send("app Running");
+//read
+app.get("/", async (req, res) => {
+    try {
+        const showAll = await User.find();
+        res.status(200).json(showAll);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: error.message });
+    }
 });
 
 app.listen(PORT || 8000, async () => {
