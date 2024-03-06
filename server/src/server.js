@@ -17,4 +17,4 @@ app.listen(PORT || 8000, async () => {
     console.log("MondoDB connected");
 });
 
-app.use(userRouter);
+app.use("/api/user", userRouter);
