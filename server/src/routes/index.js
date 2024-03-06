@@ -49,8 +49,21 @@ router.get("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     const { id } = req.params;
     try {
-        const showSingleUser = await User.findByIdAndDelete({ _id: id });
-        res.status(200).json(showSingleUser);
+        const deleteUser = await User.findByIdAndDelete({ _id: id });
+        res.status(200).json(deleteUser);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+//update
+router.patch("/:id", async (req, res) => {
+    const { id } = req.params;
+    const { name, userEmail, password } = req.body;
+    try {
+        const updateUser = await User.findByIdAndUpdate(id, req.body, { new: true, });
+        res.status(200).json(updateUser);
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: error.message });
