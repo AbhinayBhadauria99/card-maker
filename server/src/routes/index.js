@@ -33,5 +33,28 @@ router.get("/", async (req, res) => {
     }
 });
 
+//get specific user
+router.get("/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const showSingleUser = await User.findById({ _id: id });
+        res.status(200).json(showSingleUser);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+//delete
+router.delete("/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const showSingleUser = await User.findByIdAndDelete({ _id: id });
+        res.status(200).json(showSingleUser);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: error.message });
+    }
+});
 
 module.exports = router;
