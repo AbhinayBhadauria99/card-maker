@@ -3,14 +3,14 @@ import React, { useState } from 'react'
 const Create = () => {
 
     const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
+    const [userEmail, setEmail] = useState("");
     const [age, setAge] = useState(0);
 
-    console.log(name, email, age);
+    console.log(name, userEmail, age);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const addUser = { name, email, age }
-        const response = await fetch("http://localhost:3000", {    //we are use fetch() instead of AXIOS
+        const addUser = { name, userEmail, age }
+        const response = await fetch("http://localhost:4000/api/user", {    //we are use fetch() instead of AXIOS
             method: "POST",
             body: JSON.stringify(addUser),
             headers: {
@@ -28,8 +28,8 @@ const Create = () => {
     };
 
     return (
-        <div classNamename="container my-2">
-            <h2 classNamename="text-center">Enter your Card</h2>
+        <div className="container my-2">
+            <h2 className="text-center">Enter your Card</h2>
 
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
@@ -38,7 +38,7 @@ const Create = () => {
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={userEmail} onChange={(e) => setEmail(e.target.value)} />
                     <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                 </div>
                 <div className="mb-3">
