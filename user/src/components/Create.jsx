@@ -5,6 +5,7 @@ const Create = () => {
     const [name, setName] = useState("");
     const [userEmail, setEmail] = useState("");
     const [age, setAge] = useState(0);
+    const [error, setError] = useState("");
 
     console.log(name, userEmail, age);
     const handleSubmit = async (e) => {
@@ -21,14 +22,24 @@ const Create = () => {
 
         if (!response.ok) {
             console.log(result.error);
+            setError(result.error);
         }
         if (response.ok) {
             console.log(result);
+            setError("");
+            setName("");
+            setAge("");
+            setEmail("");
         }
     };
 
     return (
         <div className="container my-2">
+
+            {error && <div class="alert alert-danger" >
+                {error}
+            </div>}
+
             <h2 className="text-center">Enter your Card</h2>
 
             <form onSubmit={handleSubmit}>
