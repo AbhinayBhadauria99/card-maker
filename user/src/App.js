@@ -22,3 +22,5 @@ function App() {
 }
 
 export default App;
+
+//ctrl+H = for find and replace
