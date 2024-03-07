@@ -7,12 +7,31 @@ const Create = () => {
     const [age, setAge] = useState(0);
 
     console.log(name, email, age);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const addUser = { name, email, age }
+        const response = await fetch("http://localhost:3000", {    //we are use fetch() instead of AXIOS
+            method: "POST",
+            body: JSON.stringify(addUser),
+            headers: {
+                "Content-Type": "application/json"
+            },
+        });
+        const result = await response.json();
+
+        if (!response.ok) {
+            console.log(result.error);
+        }
+        if (response.ok) {
+            console.log(result);
+        }
+    };
 
     return (
         <div classNamename="container my-2">
             <h2 classNamename="text-center">Enter your Card</h2>
 
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label className="form-label">Name</label>
                     <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} />
