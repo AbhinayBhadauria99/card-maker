@@ -6,14 +6,14 @@ const router = express.Router();
 
 //create
 router.post("/", async (req, res) => {
-    const { name, userEmail, password } = req.body;
+    const { name, userEmail, age } = req.body;
 
 
     try {
         const userAdded = await User.create({
             name: name,
             userEmail: userEmail,
-            password: password,
+            age: age,
         });
         res.status(201).json(userAdded);
     } catch (error) {
@@ -60,7 +60,7 @@ router.delete("/:id", async (req, res) => {
 //update
 router.patch("/:id", async (req, res) => {
     const { id } = req.params;
-    const { name, userEmail, password } = req.body;
+    const { name, userEmail, age } = req.body;
     try {
         const updateUser = await User.findByIdAndUpdate(id, req.body, { new: true, });
         res.status(200).json(updateUser);
