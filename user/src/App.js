@@ -12,8 +12,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Create />} />
-          <Route exact path="/all" element={<ReadAll />} />
-          <Route exact path="/update" element={<Update />} />
+          <Route path="/all" element={<ReadAll />} />
+          <Route path="/:id" element={<Update />} />
         </Routes>
       </BrowserRouter>
 

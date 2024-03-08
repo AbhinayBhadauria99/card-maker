@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import { Link } from "react-router-dom";
 
 
 const ReadAll = () => {
@@ -61,7 +61,7 @@ const ReadAll = () => {
                                 <h6 className="card-subtitle mb-2 text-muted">{ele.userEmail}</h6>
                                 <p className='text-muted'>{ele.Age}</p>
                                 <a href="#" className="card-link" onClick={() => handleDelete(ele._id)}>Delete</a>
-                                <a href="#" className="card-link">Edit</a>
+                                <Link to={`/${ele._id}`} className="card-link">Edit</Link>
                             </div>
                         </div>
 
