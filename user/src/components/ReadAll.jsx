@@ -27,7 +27,7 @@ const ReadAll = () => {
         <div className='my-2'>
             <h2 className='text-center'>All CARDS</h2>
             <div className='row'>
-                {data.map((ele) => (
+                {data?.map((ele) => (
                     <div key={ele._id} className='col-sm-4'>
                         <div className="card">
                             <div className="card-body">
