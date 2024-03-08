@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Update = () => {
 
@@ -8,6 +8,8 @@ const Update = () => {
     const [age, setAge] = useState(0);
     const [error, setError] = useState("");
     const { id } = useParams();
+
+    const navigate = useNavigate();
 
     const getSingleUser = async () => {
 
@@ -27,6 +29,31 @@ const Update = () => {
         }
     };
 
+
+    //send updated data to backend
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        const updatedUser = { name, userEmail, age }
+        const response = await fetch(`http://localhost:4000/api/user/${id}`, {    //we are use fetch() instead of AXIOS
+            method: "PATCH",
+            body: JSON.stringify(updatedUser),
+            headers: {
+                "Content-Type": "application/json"
+            },
+        });
+        const result = await response.json();
+
+        if (!response.ok) {
+            console.log(result.error);
+            setError(result.error);
+        }
+        if (response.ok) {
+            setError("");
+            navigate("/all");
+        }
+
+    }
+
     useEffect(() => {
         getSingleUser();
     }, []);
@@ -40,7 +67,7 @@ const Update = () => {
 
             <h2 className="text-center">Edit your Card</h2>
 
-            <form>
+            <form onSubmit={handleUpdate}>
                 <div className="mb-3">
                     <label className="form-label">Name</label>
                     <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} />
