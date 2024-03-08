@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; //helps to redirect while pressing submit button
 
 const Create = () => {
 
@@ -41,8 +41,8 @@ const Create = () => {
         <div className="container my-2">
 
             {error && <div class="alert alert-danger" >
-                {error}
-            </div>}
+                {error}</div>
+            }
 
             <h2 className="text-center">Enter your Card</h2>
 
